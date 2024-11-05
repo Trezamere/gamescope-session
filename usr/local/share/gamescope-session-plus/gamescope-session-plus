@@ -3,8 +3,8 @@
 SYS_ID="$(cat /sys/devices/virtual/dmi/id/product_name)"
 
 declare -r CLIENT=$1
-declare -r CLIENT_CONFIG_DIR_USR=/usr/share/gamescope-session-plus/sessions.d
-declare -r CLIENT_CONFIG_DIR_ETC=/etc/gamescope-session-plus/sessions.d
+declare -r CLIENT_CONFIG_DIR_USR=/usr/local/share/gamescope-session-plus/sessions.d
+declare -r CLIENT_CONFIG_DIR_ETC=/usr/local/etc/gamescope-session-plus/sessions.d
 declare -r CLIENT_CONFIG_DIR_LOCAL="${XDG_CONFIG_HOME:-$HOME/.config}/gamescope-session-plus/sessions.d"
 
 # default empty session recovery function
@@ -25,7 +25,7 @@ post_client_shutdown() {
 get_gamescope_binary() {
 	if [ -n "$GAMESCOPE_BIN" ]; then
 		echo $GAMESCOPE_BIN
-	elif /usr/libexec/gamescope-sdl-workaround && command -v /usr/bin/gamescope-legacy > /dev/null; then
+	elif /usr/local/libexec/gamescope-sdl-workaround && command -v /usr/bin/gamescope-legacy > /dev/null; then
 		# GPUs that require the SDL backend
 		echo "/usr/bin/gamescope-legacy"
 	else
@@ -49,7 +49,7 @@ export mesa_glthread=true
 
 # This should be used by default by gamescope. Cannot hurt to force it anyway.
 # Reported better framelimiting with this enabled
-if /usr/libexec/gamescope-sdl-workaround; then
+if /usr/local/libexec/gamescope-sdl-workaround; then
 	# Skip on legacy hardware
 	export ENABLE_GAMESCOPE_WSI=0
 else
@@ -119,8 +119,8 @@ export GAMESCOPE_DISABLE_ASYNC_FLIPS=1
 ulimit -n 524288
 
 # Source device quirks if exists
-if [ -f /usr/share/gamescope-session-plus/device-quirks ]; then
-	. /usr/share/gamescope-session-plus/device-quirks
+if [ -f /usr/local/share/gamescope-session-plus/device-quirks ]; then
+	. /usr/local/share/gamescope-session-plus/device-quirks
 fi
 
 # Source client app specific configuration files

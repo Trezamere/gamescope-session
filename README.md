@@ -69,14 +69,14 @@ GAMESCOPECMD="gamescope -e -f"
 
 Let's say we want to create a session that simply plays a video.
 
-First, we create `/usr/share/gamescope-session-plus/sessions.d/video` to define the session.
+First, we create `/usr/local/share/gamescope-session-plus/sessions.d/video` to define the session.
 This file must define `CLIENTCMD` which specific the command to run as the main application of the session.
 In this example we add:
 `CLIENTCMD="vlc my-video.mp4"`
 
 We can also define the `short_session_recover` function in this file which is called when the session fails to start.
 
-We also need to create `/usr/share/wayland-sessions/gamescope-session-video.desktop`
+We also need to create `/usr/local/share/wayland-sessions/gamescope-session-video.desktop`
 defining the session so it appears as an option in our Display Manager/Login screen.
 
 In our example, this could be:
@@ -90,7 +90,7 @@ Type=Application
 DesktopNames=gamescope
 ```
 
-Note that the Exec must call `gamescope-session-plus` with the parameter value corresponding to the file that we placed under `/usr/share/gamescope-session-plus/sessions.d/`.
+Note that the Exec must call `gamescope-session-plus` with the parameter value corresponding to the file that we placed under `/usr/local/share/gamescope-session-plus/sessions.d/`.
 
 
 See https://github.com/shadowblip/opengamepadui-session for a real-life example of a gamescope session.
