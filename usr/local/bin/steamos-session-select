@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# This script is executed by Steam when selecting "Switch to Desktop"
+
+exec $HOME/.local/bin/systemd-steam stop
